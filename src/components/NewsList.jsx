@@ -8,7 +8,7 @@ function NewsList() {
 
   useEffect(() => {
     fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
+      `https://news-proxy.netlify.app/top-headlines?country=us&apiKey=${API_KEY}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -24,7 +24,7 @@ function NewsList() {
     <div>
       <h2>Top Headlines</h2>
       <div style={styles.grid}>
-        {articles.map((item, index) => (
+        {(articles || []).map((item, index) => (
           <div key={index} style={styles.card}>
             <img
               src={item.urlToImage}
@@ -33,7 +33,9 @@ function NewsList() {
             />
             <h3>{item.title}</h3>
             <p>{item.description}</p>
-            <a href={item.url} target="_blank">Read more</a>
+            <a href={item.url} target="_blank">
+              Read more
+            </a>
           </div>
         ))}
       </div>
